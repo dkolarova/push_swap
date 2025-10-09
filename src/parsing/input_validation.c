@@ -3,28 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolarov <dkolarov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 10:08:00 by dkolarov          #+#    #+#             */
-/*   Updated: 2025/09/23 11:27:04 by dkolarov         ###   ########.fr       */
+/*   Updated: 2025/10/09 06:34:09 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-bool	is_valid_number(const char *str)
+bool	is_valid_format(const char *str)
 {
-	long	num;
-	int		i;
+	int	i;
 
 	if (!str || !*str)
 		return (false);
 	i = 0;
 	if (str[i] == '+' || str[i] == '-')
 	{
-		if (!str[i + 1])
+		if (!str[++i])
 			return (false);
-		i++;
 	}
 	while (str[i])
 	{
@@ -32,8 +29,35 @@ bool	is_valid_number(const char *str)
 			return (false);
 		i++;
 	}
-	num = ft_atoi(str);
-	return (num >= INT_MIN && num <= INT_MAX);
+	return (true);
+}
+
+bool	is_valid_number(const char *str)
+{
+	int		i;
+	int		sign;
+	long	num;
+
+	if (!is_valid_format(str))
+		return (false);
+	i = 0;
+	sign = 1;
+	num = 0;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i])
+	{
+		num = num * 10 + (str[i] - '0');
+		if ((sign == 1 && num > INT_MAX)
+			|| (sign == -1 && num > (long)INT_MAX + 1))
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
 bool	has_duplicates(char **args)

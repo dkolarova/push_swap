@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   target_finding.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolarov <dkolarov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 10:02:07 by dkolarov          #+#    #+#             */
-/*   Updated: 2025/09/23 11:32:11 by dkolarov         ###   ########.fr       */
+/*   Updated: 2025/10/09 06:28:05 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_node	*find_target_a_to_b(t_node *current_a, t_node *b)
 	t_node	*target;
 	long	best_match;
 
-	current_a = b;
+	current_b = b;
 	target = NULL;
 	best_match = LONG_MAX;
 	while (current_b)
